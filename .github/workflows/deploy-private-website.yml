@@ -33,9 +33,9 @@ jobs:
               with:
                   submodules: true
             - uses: ./.github/actions/prepare-playground
-            - env:
-                  CORS_PROXY_URL: ${{ vars.CORS_PROXY_URL }}
             - run: npx nx build playground-website
+              env:
+                  CORS_PROXY_URL: ${{ vars.CORS_PROXY_URL }}
 
             - name: Deploy to playground.wordpress.net
               shell: bash
