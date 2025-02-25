@@ -61,6 +61,7 @@ export type {
 	FileNotFoundToInternalRedirect,
 	FileNotFoundToResponse,
 	FileNotFoundAction,
+	CookieStore,
 } from './php-request-handler';
 export { rotatePHPRuntime } from './rotate-php-runtime';
 export { writeFiles } from './write-files';

@@ -281,6 +281,7 @@ export async function runCLI(args: RunCLIArgs): Promise<RunCLIServer> {
 						}
 					},
 				},
+				cookieStore: false,
 			});
 			logger.log(`Booted!`);
 

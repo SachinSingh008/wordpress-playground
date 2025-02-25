@@ -1,4 +1,5 @@
 import {
+	CookieStore,
 	FileNotFoundAction,
 	FileNotFoundGetActionCallback,
 	FileTree,
@@ -92,6 +93,22 @@ export interface BootOptions {
 	 * given request URI.
 	 */
 	getFileNotFoundAction?: FileNotFoundGetActionCallback;
+
+	/**
+	 * The CookieStore instance to use.
+	 *
+	 * If not provided, Playground will use the HttpCookieStore by default.
+	 * The HttpCookieStore persists cookies in an internal store and includes
+	 * them in following requests.
+	 *
+	 * If you don't want Playground to handle cookies, set the cookie store
+	 * to `false`. This is useful for the Node version of Playground, where
+	 * cookies can be handled by the browser.
+	 *
+	 * You can also provide a custom CookieStore implementation by implementing
+	 * the CookieStore interface.
+	 */
+	cookieStore?: CookieStore | false;
 }
 
 /**
@@ -180,6 +197,7 @@ export async function bootWordPress(options: BootOptions) {
 		rewriteRules: wordPressRewriteRules,
 		getFileNotFoundAction:
 			options.getFileNotFoundAction ?? getFileNotFoundActionForWordPress,
+		cookieStore: options.cookieStore,
 	});
 
 	const php = await requestHandler.getPrimaryPhp();

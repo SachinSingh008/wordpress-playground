@@ -316,10 +316,11 @@ export const selectSitesLoaded = createSelector(
 			state.sites.opfsSitesLoadingState,
 		(state: { sites: ReturnType<typeof sitesSlice.reducer> }) =>
 			state.sites.firstTemporarySiteCreated,
+		(state) => selectActiveSite(state),
 	],
-	(opfsSitesLoadingState, firstTemporarySiteCreated) =>
+	(opfsSitesLoadingState, firstTemporarySiteCreated, activeSite) =>
 		['loaded', 'error'].includes(opfsSitesLoadingState) &&
-		firstTemporarySiteCreated
+		(activeSite?.metadata.storage !== 'none' || firstTemporarySiteCreated)
 );
 
 export default sitesSlice.reducer;

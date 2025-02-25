@@ -42,6 +42,24 @@ export type FileNotFoundGetActionCallback = (
 	relativePath: string
 ) => FileNotFoundAction;
 
+/**
+ * Interface for cookie storage implementations.
+ * This allows different cookie handling strategies to be used with the PHP request handler.
+ */
+export interface CookieStore {
+	/**
+	 * Processes and stores cookies from response headers
+	 * @param headers Response headers containing Set-Cookie directives
+	 */
+	rememberCookiesFromResponseHeaders(headers: Record<string, string[]>): void;
+
+	/**
+	 * Gets the cookie header string for the next request
+	 * @returns Formatted cookie header string
+	 */
+	getCookieRequestHeader(): string;
+}
+
 interface BaseConfiguration {
 	/**
 	 * The directory in the PHP filesystem where the server will look
@@ -95,7 +113,9 @@ export type PHPRequestHandlerConfiguration = BaseConfiguration &
 				 */
 				maxPhpInstances?: number;
 		  }
-	);
+	) & {
+		cookieStore?: CookieStore | false;
+	};
 
 /**
  * Handles HTTP requests using PHP runtime as a backend.
@@ -159,7 +179,7 @@ export class PHPRequestHandler {
 	#HOST: string;
 	#PATHNAME: string;
 	#ABSOLUTE_URL: string;
-	#cookieStore: HttpCookieStore;
+	#cookieStore: CookieStore | false;
 	rewriteRules: RewriteRule[];
 	processManager: PHPProcessManager;
 	getFileNotFoundAction: FileNotFoundGetActionCallback;
@@ -198,7 +218,11 @@ export class PHPRequestHandler {
 				maxPhpInstances: config.maxPhpInstances,
 			});
 		}
-		this.#cookieStore = new HttpCookieStore();
+
+		this.#cookieStore =
+			config.cookieStore === undefined
+				? new HttpCookieStore()
+				: config.cookieStore;
 		this.#DOCROOT = documentRoot;
 
 		const url = new URL(absoluteUrl);
@@ -490,8 +514,10 @@ export class PHPRequestHandler {
 		const headers: Record<string, string> = {
 			host: this.#HOST,
 			...normalizeHeaders(request.headers || {}),
-			cookie: this.#cookieStore.getCookieRequestHeader(),
 		};
+		if (this.#cookieStore) {
+			headers['cookie'] = this.#cookieStore.getCookieRequestHeader();
+		}
 
 		let body = request.body;
 		if (typeof body === 'object' && !(body instanceof Uint8Array)) {
@@ -520,9 +546,11 @@ export class PHPRequestHandler {
 				scriptPath,
 				headers,
 			});
-			this.#cookieStore.rememberCookiesFromResponseHeaders(
-				response.headers
-			);
+			if (this.#cookieStore) {
+				this.#cookieStore.rememberCookiesFromResponseHeaders(
+					response.headers
+				);
+			}
 			return response;
 		} catch (error) {
 			const executionError = error as PHPExecutionFailureError;
