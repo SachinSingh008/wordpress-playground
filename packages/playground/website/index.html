@@ -21,12 +21,31 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="stylesheet" href="/src/styles.css" />
-		<link rel="manifest" href="/manifest.json" />
 		<script>
-			// Outside of the local dev server, use the dynamic manifest that
-			// passes the query parameters through to the "start_url" property.
+			/**
+			 * Dynamically create <link rel="manifest" /> to enable using Playground with
+			 * a Blueprint as an offline progressive web app.
+			 *
+			 * We don't have a static <link rel="manifest" /> element in the initial HTML
+			 * because Safari would just go with it and ignore the dynamic updates made below.
+			 * It has no problem with dynamically created manifest element, though.
+			 *
+			 * If this method ever fails, we'll need to rename index.html to index.php and
+			 * ensure the <link rel="manifest" /> element is shipped in the initial HTML.
+			 */
+
+			/**
+			 * On the local dev server, use the static manifest.json file.
+			 * Outside of the local dev server, use the dynamic manifest that
+			 * passes the query parameters through to the "start_url" property.
+			 */
+			let manifestUrl = '/manifest.json';
+
+			/**
+			 * In production, load a manifest URL that includes the current URL
+			 * as the "start_url" parameter.
+			 */
 			if (window.location.port !== '5400') {
-				let manifestUrl = null;
 				const runningAsPWA = window.matchMedia(
 					'(display-mode: standalone)'
 				).matches;
@@ -58,10 +77,11 @@
 						);
 					}
 				}
-
-				document.querySelector('link[rel="manifest"]').href =
-					manifestUrl.toString();
 			}
+			const newLink = document.createElement('link');
+			newLink.rel = 'manifest';
+			newLink.href = manifestUrl.toString();
+			document.head.appendChild(newLink);
 		</script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
