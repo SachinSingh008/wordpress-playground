@@ -453,13 +453,6 @@ const schema11 = {
 							$ref: '#/definitions/FileReference',
 							description: 'The file to import',
 						},
-						importer: {
-							type: 'string',
-							enum: ['data-liberation', 'default'],
-							description:
-								'The importer to use. Possible values:\n\n- `default`: The importer from https://github.com/humanmade/WordPress-Importer\n- `data-liberation`: The experimental Data Liberation WXR importer developed at                      https://github.com/WordPress/wordpress-playground/issues/1894\n\nThis option is deprecated. The syntax will not be removed, but once the Data Liberation importer matures, it will become the only supported importer and the `importer` option will be ignored.',
-							deprecated: true,
-						},
 					},
 					required: ['file', 'step'],
 				},
@@ -3161,13 +3154,6 @@ const schema22 = {
 				file: {
 					$ref: '#/definitions/FileReference',
 					description: 'The file to import',
-				},
-				importer: {
-					type: 'string',
-					enum: ['data-liberation', 'default'],
-					description:
-						'The importer to use. Possible values:\n\n- `default`: The importer from https://github.com/humanmade/WordPress-Importer\n- `data-liberation`: The experimental Data Liberation WXR importer developed at                      https://github.com/WordPress/wordpress-playground/issues/1894\n\nThis option is deprecated. The syntax will not be removed, but once the Data Liberation importer matures, it will become the only supported importer and the `importer` option will be ignored.',
-					deprecated: true,
 				},
 			},
 			required: ['file', 'step'],
@@ -10052,38 +10038,6 @@ function validate14(
 																		},
 																		message:
 																			'must be string',
-																	},
-																];
-															return false;
-														}
-														if (
-															!(
-																data40 ===
-																	'data-liberation' ||
-																data40 ===
-																	'default'
-															)
-														) {
-															validate14.errors =
-																[
-																	{
-																		instancePath:
-																			instancePath +
-																			'/importer',
-																		schemaPath:
-																			'#/oneOf/6/properties/importer/enum',
-																		keyword:
-																			'enum',
-																		params: {
-																			allowedValues:
-																				schema22
-																					.oneOf[6]
-																					.properties
-																					.importer
-																					.enum,
-																		},
-																		message:
-																			'must be equal to one of the allowed values',
 																	},
 																];
 															return false;
