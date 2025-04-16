@@ -12,7 +12,7 @@ export default async function packageForSelfHostingExecutor(
 	let hostingBaseUrl: URL;
 	try {
 		hostingBaseUrl = new URL(options.hostingBaseUrl);
-	} catch (e) {
+	} catch {
 		logger.error(
 			`hostingBaseUrl option "${options.hostingBaseUrl}" is not a URL.`
 		);

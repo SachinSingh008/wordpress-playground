@@ -31,6 +31,7 @@ export class Logger extends EventTarget {
 	// constructor
 	constructor(
 		// Log handlers
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		private readonly handlers: Function[] = []
 	) {
 		super();
@@ -161,7 +162,7 @@ const getDefaultHandlers = () => {
 		if (process.env['NODE_ENV'] === 'test') {
 			return [logToMemory, logEvent];
 		}
-	} catch (e) {
+	} catch {
 		// Process.env is not available in the browser
 	}
 	return [logToMemory, logToConsole, logEvent];

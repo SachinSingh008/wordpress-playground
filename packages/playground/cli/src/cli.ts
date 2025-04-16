@@ -103,7 +103,7 @@ async function run() {
 				try {
 					// Check if is valid URL
 					new URL(args.wp);
-				} catch (e) {
+				} catch {
 					throw new Error(
 						'Unrecognized WordPress version. Please use "latest", a URL, or a numeric version such as "6.2", "6.0.1", "6.2-beta1", or "6.2-RC1"'
 					);

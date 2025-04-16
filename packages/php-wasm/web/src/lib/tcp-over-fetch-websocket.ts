@@ -322,7 +322,7 @@ export class TCPOverFetchWebsocket {
 				request,
 				this.corsProxyUrl
 			).pipeTo(tlsConnection.serverEnd.downstream.writable);
-		} catch (e) {
+		} catch {
 			// Ignore errors from fetch()
 			// They are handled in the constructor
 			// via this.clientDownstream.readable.pipeTo()
@@ -343,7 +343,7 @@ export class TCPOverFetchWebsocket {
 				request,
 				this.corsProxyUrl
 			).pipeTo(this.clientDownstream.writable);
-		} catch (e) {
+		} catch {
 			// Ignore errors from fetch()
 			// They are handled in the constructor
 			// via this.clientDownstream.readable.pipeTo()

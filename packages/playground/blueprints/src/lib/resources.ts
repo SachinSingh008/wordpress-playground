@@ -393,7 +393,7 @@ export abstract class FetchResource extends Resource<File> {
 			return new URL(this.getURL(), 'http://example.com').pathname
 				.split('/')
 				.pop()!;
-		} catch (e) {
+		} catch {
 			return this.getURL();
 		}
 	}

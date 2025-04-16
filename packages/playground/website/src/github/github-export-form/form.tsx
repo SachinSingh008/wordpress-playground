@@ -102,7 +102,7 @@ export default function GitHubExportForm({
 					formValues.repoUrl
 				);
 				return { owner: owner!, repo: repo! };
-			} catch (e) {
+			} catch {
 				// Ignore
 			}
 		}
@@ -279,7 +279,7 @@ export default function GitHubExportForm({
 						defaultBranch,
 						toPathInRepo
 					));
-			} catch (e) {
+			} catch {
 				// ignore
 			}
 			const ghComparableFiles = filesListToObject(ghRawFiles);

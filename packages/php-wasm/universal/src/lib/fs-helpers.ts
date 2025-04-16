@@ -273,7 +273,7 @@ export class FSHelpers {
 		try {
 			FS.lookupPath(path);
 			return true;
-		} catch (e) {
+		} catch {
 			return false;
 		}
 	}

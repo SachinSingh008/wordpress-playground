@@ -365,7 +365,7 @@ function compileBlueprintJson(
 					await (playground as any).goTo(
 						blueprint.landingPage || '/'
 					);
-				} catch (e) {
+				} catch {
 					/**
 					 * Redirecting to the landing page is a browser-only feature for now.
 					 *

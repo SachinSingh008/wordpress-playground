@@ -14,11 +14,20 @@ import clientsReducer, {
 	ClientInfo,
 	selectAllClientInfo,
 } from './slice-clients';
-import { GetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ignoreSerializableCheck = (getDefaultMiddleware: GetDefaultMiddleware) =>
-	getDefaultMiddleware({
+type ConfigureStoreOptions<T> = Parameters<typeof configureStore<T>>[0];
+type ConfigureStoreOptionsMiddleware<T> = NonNullable<
+	ConfigureStoreOptions<T>['middleware']
+>;
+type GetDefaultMiddleware<T> = Parameters<
+	ConfigureStoreOptionsMiddleware<T>
+>[0];
+
+function ignoreSerializableCheck<S>(
+	getDefaultMiddleware: GetDefaultMiddleware<S>
+) {
+	return getDefaultMiddleware({
 		serializableCheck: {
 			// Ignore these action types
 			ignoredActions: [
@@ -42,6 +51,7 @@ const ignoreSerializableCheck = (getDefaultMiddleware: GetDefaultMiddleware) =>
 			],
 		},
 	});
+}
 
 const store = configureStore({
 	reducer: {

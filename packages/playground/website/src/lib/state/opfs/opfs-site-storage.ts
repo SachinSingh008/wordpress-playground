@@ -43,7 +43,7 @@ try {
 			create: true,
 		});
 	}
-} catch (e) {
+} catch {
 	// Ignore. OPFS is not supported in this environment.
 }
 
@@ -234,11 +234,11 @@ async function opfsChildExists(
 	try {
 		await handle.getDirectoryHandle(name);
 		return true;
-	} catch (e) {
+	} catch {
 		try {
 			await handle.getFileHandle(name);
 			return true;
-		} catch (e) {
+		} catch {
 			return false;
 		}
 	}

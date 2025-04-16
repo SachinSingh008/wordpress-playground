@@ -257,7 +257,7 @@ export async function playgroundAvailableInOpfs(
 			create: false,
 		});
 		await database.getFileHandle('.ht.sqlite', { create: false });
-	} catch (e) {
+	} catch {
 		return false;
 	}
 	return true;

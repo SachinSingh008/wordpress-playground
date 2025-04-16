@@ -138,6 +138,7 @@ export function journalFSEvents(
 		 * We could use a Proxy object here if the Emscripten JavaScript module
 		 * did not use hard-coded references to the FS object.
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 		const originalFunctions: Record<string, Function> = {};
 		for (const [name] of Object.entries(FSHooks)) {
 			originalFunctions[name] = FS[name];
@@ -257,7 +258,7 @@ const createFSHooks = (
 				path: oldLookup.path,
 				toPath: joinPaths(newParentPath, basename(new_path)),
 			});
-		} catch (e) {
+		} catch {
 			// We're running a bunch of FS lookups that may fail at this point.
 			// Let's ignore the failures and let the actual rename operation
 			// fail if it needs to.

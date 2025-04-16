@@ -254,7 +254,7 @@ async function overwriteOpfsFile(
 		buffer = FS.readFile(memfsPath, {
 			encoding: 'binary',
 		});
-	} catch (e) {
+	} catch {
 		// File was removed, ignore
 		return;
 	}
@@ -341,7 +341,7 @@ class OpfsRewriter {
 					await opfsParent.removeEntry(name, {
 						recursive: true,
 					});
-				} catch (e) {
+				} catch {
 					// If the directory already doesn't exist, it's fine
 				}
 			} else if (entry.operation === 'CREATE') {
@@ -416,7 +416,7 @@ class OpfsRewriter {
 					 */
 					try {
 						await opfsParent.removeEntry(name);
-					} catch (e) {
+					} catch {
 						// If the directory already doesn't exist, it's fine
 					}
 					await overwriteOpfsFile(

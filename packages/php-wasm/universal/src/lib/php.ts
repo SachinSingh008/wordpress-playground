@@ -607,7 +607,7 @@ export class PHP implements Disposable {
 		let port;
 		try {
 			port = parseInt(new URL(host).port, 10);
-		} catch (e) {
+		} catch {
 			// ignore
 		}
 
@@ -739,7 +739,7 @@ export class PHP implements Disposable {
 							'{}'
 					: '{}'
 			);
-		} catch (e) {
+		} catch {
 			// ignore
 		}
 		this.writeFile(
@@ -1028,7 +1028,7 @@ export class PHP implements Disposable {
 		// Kill the current runtime
 		try {
 			this.exit();
-		} catch (e) {
+		} catch {
 			// Ignore the exit-related exception
 		}
 
@@ -1138,7 +1138,7 @@ export class PHP implements Disposable {
 		});
 		try {
 			this[__private__dont__use]._exit(code);
-		} catch (e) {
+		} catch {
 			// ignore the exit error
 		}
 
@@ -1180,7 +1180,7 @@ function copyFS(
 	let oldNode;
 	try {
 		oldNode = source.lookupPath(path);
-	} catch (e) {
+	} catch {
 		return;
 	}
 	// MEMFS nodes have a `contents` property. NODEFS nodes don't.
@@ -1199,7 +1199,7 @@ function copyFS(
 		//        how do we sync in both directions?
 		// target = target.lookupPath(path);
 		// return;
-	} catch (e) {
+	} catch {
 		// There's no such node in the new FS. Good,
 		// we may proceed.
 	}

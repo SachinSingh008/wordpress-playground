@@ -160,7 +160,7 @@ export async function bootPlaygroundRemote() {
 						contentWindow.location.href
 					);
 					fn(path);
-				} catch (e) {
+				} catch {
 					// @TODO: The above call can fail if the remote iframe
 					// is embedded in StackBlitz, or presumably, any other
 					// environment with restrictive CSP. Any error thrown
@@ -195,7 +195,7 @@ export async function bootPlaygroundRemote() {
 				try {
 					wpFrame.contentWindow.location.href = newUrl;
 					return;
-				} catch (e) {
+				} catch {
 					// The above call can fail if we're embedded in an
 					// environment with a restrictive CSP policy.
 				}
@@ -206,7 +206,7 @@ export async function bootPlaygroundRemote() {
 			let url = '';
 			try {
 				url = wpFrame.contentWindow!.location.href;
-			} catch (e) {
+			} catch {
 				// The above call can fail if we're embedded in an
 				// environment with a restrictive CSP policy.
 			}
@@ -300,6 +300,7 @@ export async function bootPlaygroundRemote() {
 					const args = event.data.args || [];
 					const method = event.data
 						.method as keyof PlaygroundWorkerEndpoint;
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 					const result = await (phpWorkerApi[method] as Function)(
 						...args
 					);
@@ -411,7 +412,7 @@ function assertNotInfiniteLoadingLoop() {
 		isBrowserInABrowser =
 			window.parent !== window &&
 			(window as any).parent.IS_WASM_WORDPRESS;
-	} catch (e) {
+	} catch {
 		// ignore
 	}
 	if (isBrowserInABrowser) {

@@ -57,6 +57,7 @@ export async function setupPlaygroundSync(
 		transport.sendChanges(flushedChanges);
 	};
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 	const loopAfterInterval = async (f: Function, ms: number) => {
 		await f();
 		setTimeout(loopAfterInterval, ms, f, ms);

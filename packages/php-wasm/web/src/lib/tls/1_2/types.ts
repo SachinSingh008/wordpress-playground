@@ -161,6 +161,7 @@ export interface HandshakeMessage<Body extends HandshakeMessageBody> {
 }
 
 // Specific Handshake Message Types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface HelloRequest {} // Empty for TLS 1.2
 
 /**
@@ -252,6 +253,7 @@ export interface CertificateRequest {
 	certificate_authorities: Uint8Array;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ServerHelloDone {} // Empty for TLS 1.2
 
 export interface CertificateVerify {

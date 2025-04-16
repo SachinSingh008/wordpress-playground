@@ -74,6 +74,7 @@ export interface WebClientMixin extends ProgressReceiver {
 /**
  * The Playground Client interface.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface PlaygroundClient
 	extends RemoteAPI<PlaygroundWorkerEndpoint & WebClientMixin> {}
 

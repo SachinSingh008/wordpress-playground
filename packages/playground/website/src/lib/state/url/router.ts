@@ -28,10 +28,10 @@ export function parseBlueprint(rawData: string) {
 	try {
 		try {
 			return JSON.parse(rawData);
-		} catch (e) {
+		} catch {
 			return JSON.parse(decodeBase64ToString(rawData));
 		}
-	} catch (e) {
+	} catch {
 		throw new Error('Invalid blueprint');
 	}
 }

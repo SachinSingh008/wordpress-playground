@@ -425,7 +425,7 @@ export class PlaygroundWorkerEndpoint extends PHPWorker {
 						res.text()
 					);
 					primaryPhp.writeFile(remoteAssetListPath, remoteAssetPaths);
-				} catch (e) {
+				} catch {
 					logger.warn(
 						`Failed to fetch remote asset paths from ${listUrl}`
 					);

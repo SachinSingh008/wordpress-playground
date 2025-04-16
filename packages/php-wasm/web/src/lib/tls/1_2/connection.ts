@@ -255,27 +255,27 @@ export class TLS_1_2_Connection {
 		this.closed = true;
 		try {
 			await this.clientDownstreamWriter.close();
-		} catch (e) {
+		} catch {
 			// Ignore
 		}
 		try {
 			await this.clientUpstreamReader.cancel();
-		} catch (e) {
+		} catch {
 			// Ignore
 		}
 		try {
 			await this.serverUpstreamWriter.close();
-		} catch (e) {
+		} catch {
 			// Ignore
 		}
 		try {
 			await this.clientEnd.upstream.readable.cancel();
-		} catch (e) {
+		} catch {
 			// Ignore
 		}
 		try {
 			await this.clientEnd.downstream.writable.close();
-		} catch (e) {
+		} catch {
 			// Ignore
 		}
 	}

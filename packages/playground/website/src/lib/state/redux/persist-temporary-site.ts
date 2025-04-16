@@ -201,7 +201,7 @@ async function getPlaygroundDefinedPHPConstants(playground: PlaygroundClient) {
 		constants = JSON.parse(
 			await playground.readFileAsText('/internal/shared/consts.json')
 		);
-	} catch (error) {
+	} catch {
 		// Do nothing
 	}
 	return constants;

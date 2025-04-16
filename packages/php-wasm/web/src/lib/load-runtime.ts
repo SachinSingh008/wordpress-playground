@@ -28,7 +28,7 @@ const fakeWebsocket = () => {
 					constructor() {
 						try {
 							super();
-						} catch (e) {
+						} catch {
 							// pass
 						}
 					}

@@ -228,7 +228,7 @@ export class NodeJsFilesystem implements Filesystem {
 			try {
 				this.fs = await import('fs');
 				this.path = await import('path');
-			} catch (e) {
+			} catch {
 				this.fs = require('fs');
 				this.path = require('path');
 			}

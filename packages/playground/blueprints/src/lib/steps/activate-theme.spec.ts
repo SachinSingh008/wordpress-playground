@@ -103,7 +103,7 @@ describe('Blueprint step activateTheme()', () => {
 			`${docroot}/wp-content/mu-plugins/0-exit.php`,
 			`<?php exit(0); `
 		);
-		expect(
+		await expect(
 			async () =>
 				await activateTheme(php, {
 					themeFolderName: 'test-theme',
