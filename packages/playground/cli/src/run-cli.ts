@@ -44,6 +44,7 @@ export interface RunCLIArgs {
 	skipWordPressSetup?: boolean;
 	skipSqliteSetup?: boolean;
 	wp?: string;
+	followSymlinks?: boolean;
 }
 
 export interface RunCLIServer {
@@ -263,7 +264,9 @@ export async function runCLI(args: RunCLIArgs): Promise<RunCLIServer> {
 			requestHandler = await bootWordPress({
 				siteUrl: absoluteUrl,
 				createPhpRuntime: async () =>
-					await loadNodeRuntime(compiledBlueprint.versions.php),
+					await loadNodeRuntime(compiledBlueprint.versions.php, {
+						followSymlinks: args.followSymlinks === true,
+					}),
 				wordPressZip,
 				sqliteIntegrationPluginZip: args.skipSqliteSetup
 					? undefined

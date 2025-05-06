@@ -98,6 +98,12 @@ async function run() {
 			type: 'boolean',
 			default: false,
 		})
+		.option('followSymlinks', {
+			describe:
+				'Allow Playground to follow symlinks by automatically mounting symlinked directories and files encountered in mounted directories. \nWarning: Following symlinks will expose files outside mounted directories to Playground and could be a security risk.',
+			type: 'boolean',
+			default: false,
+		})
 		.showHelpOnFail(false)
 		.check((args) => {
 			if (args.wp !== undefined && !isValidWordPressSlug(args.wp)) {
