@@ -9,6 +9,27 @@ All notable changes to this project are documented in this file by a CI job
 that runs on every NPM release. The file follows the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 format.
 
+## [v1.0.33] (2025-05-08) 
+
+### Various
+
+- Add MySQL network calls to Asyncify tests. ([#108](https://github.com/Automattic/wordpress-playground-private/pull/108))
+- Format the plugin-proxy file. ([#127](https://github.com/Automattic/wordpress-playground-private/pull/127))
+- Plugin proxy: Allow all repos from WordPress, Automattic and Woocommerce organizations. ([#128](https://github.com/Automattic/wordpress-playground-private/pull/128))
+- QUERY_STRING should default to empty string. ([#139](https://github.com/Automattic/wordpress-playground-private/pull/139))
+- Remove null steps that are added. ([#135](https://github.com/Automattic/wordpress-playground-private/pull/135))
+- Remove unused dependencies. ([#116](https://github.com/Automattic/wordpress-playground-private/pull/116))
+- [CLI] Fix package entry point path. ([#136](https://github.com/Automattic/wordpress-playground-private/pull/136))
+- [PHP-wasm Node] Add support for resolving wasm paths in Windows. ([#129](https://github.com/Automattic/wordpress-playground-private/pull/129))
+- [PHP-wasm Node] Dynamically mount symlinks. ([#125](https://github.com/Automattic/wordpress-playground-private/pull/125))
+
+### Contributors
+
+The following contributors merged PRs in this release:
+
+@adamziel @ashfame @bgrgicak @ingeniumed @sejas
+
+
 ## [v1.0.32] (2025-05-06) 
 
 ### Various
