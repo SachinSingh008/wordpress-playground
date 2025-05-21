@@ -56,7 +56,10 @@ export type TCPOverFetchOptions = {
  * Sets up a WebSocket that analyzes the received bytes and, if they look like
  * TLS or HTTP, handles the network transmission using fetch().
  */
-export const tcpOverFetchWebsocket = (emOptions: EmscriptenOptions, tcpOptions: TCPOverFetchOptions) => {
+export const tcpOverFetchWebsocket = (
+	emOptions: EmscriptenOptions,
+	tcpOptions: TCPOverFetchOptions
+) => {
 	return {
 		...emOptions,
 		websocket: {

@@ -50,6 +50,9 @@ const dirnamePlugin = {
 				// NOTE: We are building for CommonJS, so we need to remove the
 				// shims for the builtins `__dirname` and `require`.
 				contents = contents.replace(/\bconst __dirname\s*=.*/, '');
+				contents = contents.replace(/\bvar __dirname\s*=.*/, '');
+				contents = contents.replace(/\bconst __filename\s*=.*/, '');
+				contents = contents.replace(/\bvar __filename\s*=.*/, '');
 				contents = contents.replace(/\bconst require\s*=.*/, '');
 
 				const loader = path.extname(filePath).substring(1);

@@ -113,17 +113,17 @@ export default defineConfig(({ command }) => {
 				entry: 'src/index.ts',
 				name: 'php-wasm-web',
 				fileName: 'index',
-				formats: ['es'],
+				formats: ['es', 'cjs'],
 			},
 			sourcemap: true,
 			rollupOptions: {
 				// Don't bundle the PHP loaders in the final build. See
 				// the preserve-php-loaders-imports plugin above.
-				external: [/php_\d_\d.js$/, /icudt74l\.js$/, ...getExternalModules()],
-				output: {
-					// Ensure the PHP loaders are not hashed in the final build.
-					entryFileNames: '[name].js',
-				},
+				external: [
+					/php_\d_\d.js$/,
+					/icudt74l\.js$/,
+					...getExternalModules(),
+				],
 			},
 		},
 

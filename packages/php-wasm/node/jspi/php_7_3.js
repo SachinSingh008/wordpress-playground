@@ -4,12 +4,22 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+/**
+ * __filename and __dirname are not available in ES modules, so we need to
+ * polyfill them to ensure the debug command (npx nx debug playground-cli)
+ * works.
+ *
+ * @see https://nodejs.org/api/esm.html#no-__filename-or-__dirname
+ */
 import path from 'path';
+if (typeof __filename === 'undefined') {
+	var __filename = fileURLToPath(import.meta.url);
+}
+if (typeof __dirname === 'undefined') {
+	var __dirname = path.dirname(__filename);
+}
+
 const dependencyFilename = path.join(__dirname, '7_3_33', 'php_7_3.wasm');
 export { dependencyFilename };
 export const dependenciesTotalSize = 17913346;
