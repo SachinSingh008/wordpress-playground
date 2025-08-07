@@ -475,26 +475,6 @@
 					<h2>💡 Tips</h2>
 					<ul>
 						<li>
-							<strong>🌟 WordPress is available!</strong> Run
-							<code>require '/wordpress/wp-load.php';</code> to
-							load the latest WordPress release. For example:
-							<pre
-								style="
-									background: #f5f5f5;
-									padding: 8px;
-									margin: 8px 0;
-									border-radius: 4px;
-									font-size: 13px;
-									overflow-x: auto;
-								"
-							><code>&lt;?php
-require '/wordpress/wp-load.php';
-
-$html_processor = WP_HTML_Processor::create_fragment('&lt;p>&lt;span>Hey!&lt;/span>&lt;/p>');
-$html_processor->next_tag();
-var_dump($html_processor->get_tag());</code></pre>
-						</li>
-						<li>
 							<strong>🔗 Embed in your app:</strong> You can embed
 							this playground in an iframe to provide interactive
 							PHP code snippets. Provide your base64-encoded code
@@ -734,15 +714,15 @@ var_dump($html_processor->get_tag());</code></pre>
 			restorePHPVersionFromURL();
 
 			const defaultCode = `<?php
-// Welcome to PHP Playground!
-$message = "Hello from PHP " . phpversion();
-echo $message;
+echo "Hello from PHP " . phpversion();
+echo "<br>";
 
-function greet($name) {
-    return "Hello, " . $name . "!";
-}
+// WordPress is available if you need it!
+require '/wordpress/wp-load.php';
 
-echo greet("World");
+$html_processor = WP_HTML_Processor::create_fragment('<p><span>Hey!</span></p>');
+$html_processor->next_tag();
+var_dump($html_processor->get_tag());
 ?>`;
 
 			// Load initial state from URL
